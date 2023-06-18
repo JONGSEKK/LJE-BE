@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model user_pekerja {
+  id                 String  @id @default(uuid())
+  Staf_ID            String  @unique
+  Nama_Pekerja       String
+  Telefon_Pekerja    String  @unique
+  Emel_Pekerja       String  @unique
+  Alamat_Pekerja     String
+  NoKP_Pekerja       String  @unique
+  Peranan_Pekerja    String
+  KataLaluan_Pekerja String
+  Gaji_Pekerja       Int
+  GambarPekerja      String?
+}
+
+model kategori {
+  id                 String    @id @default(uuid())
+  Nama_Kategori      String    @unique
+  Deskripsi_Kategori String?
+  produk             produk[]
+  promosi            promosi[]
+}
+
+model produk {
+  id                String   @id @default(uuid())
+  Produk_ID         String   @unique
+  Nama_Produk       String
+  Gambar            String?
+  Harga_Produk      String
+  Deskripsi_Produk  String?
+  Kategori          kategori @relation(fields: [kategoriProduk], references: [id])
+  kategoriProduk    String
+  Saiz_Produk       String?
+  Kuantiti_Produk   Int      @default(0)
+  Kuantiti_Tambahan Int      @default(0)
+  // jualan            jualan[]
+  // notifikasi        notifikasi[]
+}
+
+model promosi {
+  id                String   @id @default(uuid())
+  ID_Promosi        String
+  Nama_Promosi      String
+  Deskripsi_Promosi String
+  Harga_Promosi     Int
+  Status_Promosi    String
+  Kategori          kategori @relation(fields: [kategoriTerlibat], references: [id])
+  kategoriTerlibat  String
+}
+
+model jualan {
+  id          String   @id @default(uuid())
+  // produk      produk   @relation(fields: [barcode], references: [Produk_ID])
+  barcode     String
+  kuantiti    Int
+  jumlahHarga Int
+  HargaProduk Int?
+  NamaProduk  String?
+  createdAt   DateTime @default(now())
+}
+
+model notifikasi {
+  id             String  @id @default(uuid())
+  // produk         produk  @relation(fields: [id], references: [id])
+  // ProdukID       String
+  kuantitiTambah Int
+  permohonan     Boolean @default(false)
+}
