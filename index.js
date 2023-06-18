@@ -4,11 +4,11 @@ const { PrismaClient } = require("@prisma/client")
 const cors = require('cors');
 
 
-app.use(cors({ origin: 'https://lje-ms-backend.onrender.com' }));
+app.use(cors({ origin: 'https://ladiesjeansms.onrender.com' }));
 
 
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://lje-ms-backend.onrender.com');
+    res.setHeader('Access-Control-Allow-Origin', 'https://ladiesjeansms.onrender.com');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
