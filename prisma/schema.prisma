@@ -41,8 +41,7 @@ model produk {
   Saiz_Produk       String?
   Kuantiti_Produk   Int      @default(0)
   Kuantiti_Tambahan Int      @default(0)
-  // jualan            jualan[]
-  // notifikasi        notifikasi[]
+
 }
 
 model promosi {
@@ -58,7 +57,6 @@ model promosi {
 
 model jualan {
   id          String   @id @default(uuid())
-  // produk      produk   @relation(fields: [barcode], references: [Produk_ID])
   barcode     String
   kuantiti    Int
   jumlahHarga Int
@@ -69,8 +67,6 @@ model jualan {
 
 model notifikasi {
   id             String  @id @default(uuid())
-  // produk         produk  @relation(fields: [id], references: [id])
-  // ProdukID       String
   kuantitiTambah Int
   permohonan     Boolean @default(false)
 }
