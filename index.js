@@ -347,8 +347,18 @@ app.get("/promosi", async (req, res) => {
   res.json(allPromosi);
 });
 
+// app.get("/jualan", async (req, res) => {
+//   const allSales = await prisma.jualan.findMany();
+
+//   res.json(allSales);
+// });
+
 app.get("/jualan", async (req, res) => {
-  const allSales = await prisma.jualan.findMany();
+  const allSales = await prisma.jualan.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
   res.json(allSales);
 });
